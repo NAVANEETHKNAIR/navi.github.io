@@ -1,0 +1,144 @@
+Write a function named count_consonants that receives a string as parameter and returns the total count of the consonants in the string. Consonants are all the characters in the english alphabet except for 'a', 'e', 'i', 'o', 'u'. If the same consonant repeats multiple times you should count all of them. Note that capitalization and punctuation does not matter here i.e. a lower case character should be considered the same as an upper case character.
+
+ 
+################### Instructor function ###################
+def _total_consonants_sample_(sample_string):
+    spaces_removed = sample_string.replace(" ", "")
+    count = 0
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    for char in spaces_removed.lower():
+        if char not in vowels:
+            count = count + 1
+    return count
+
+ 
+ 
+ Write a function named find_longest_word that receives a string as parameter and returns the longest word in the string. Assume that the input to this function is a string of words consisting of alphabetic characters that are separated by space(s). In case of a tie between some words return the last one that occurs.
+
+ 
+################### Instructor function ###################
+def _longest_word_sample_(input_string):
+    # Create a list of strings by splitting the original string
+    splitted_string = input_string.split()
+    # First arbitrarily set the maximum length
+    # as the length of the first string
+    maximum_length = len(splitted_string[0])
+    # Also set the longest word as the first string
+    longest_word = splitted_string[0]
+    # Go through each string in the list we created
+    # calculate the length of each string
+    # check to see if its length is larger than maximum length
+    # if so update it and return the string
+    for string in splitted_string:
+        # check the length of each string   # it resets for each string
+        string_length = len(string)
+        if string_length >= maximum_length:
+            # maximum_length = string_length
+            longest_word = string
+    return longest_word
+
+ 
+ 
+ Pay attention to the spaces. Your answer should exactly match the correct Python output.
+
+ my_list = [[3,4],[6,7],[10,12]]
+print(my_list[0:2])
+  
+
+  unanswered  [[3,4],[6,7]]
+
+my_list = [[3,5,6], [6,4,2], [9,4,8]]
+for k in range (len(my_list)):
+    my_list[k][0] = 1
+print(my_list)
+  
+
+  unanswered  [[1,5,6],[1,4,2],[1,4,8]]
+
+my_list = [[6,2],[3,9,5]]
+x = 0
+for m in range(len(my_list)):
+    for k in range(len(my_list[m])):
+        x = x + my_list[m][k] 
+print(x)
+  
+
+  unanswered  
+25
+ my_list = []
+for m in range(0,2):
+    new_list = []
+    for k in range(4,6):
+        new_list.append(k)
+    my_list.append(new_list)
+print(my_list)
+  
+
+  unanswered  [[4,5],[4,5]]
+
+my_list = [[3,5],[2,9],[4,7]]
+for m in range(len(my_list)):
+    for k in range(len(my_list[m])):
+        my_list[m][k] = my_list[m][k] * 2
+print(my_list)
+  
+
+  unanswered  [[6,10],[4,18],[8,14]]
+
+numbers={1: "uno", 3:"two", "tres":3}
+print(numbers.pop(3))
+  
+
+  unanswered  
+two
+ numbers={"one": [1,"uno"], "two": [2,"dos"]}
+print (numbers["two"][1][2])
+
+  unanswered  
+s
+ d={1:"one", "two": 2 , 3: "tres"}
+print (d[2])
+  
+
+  unanswered  
+Error
+ d={1:"one", "two": 2 , 3: "tres"}
+print (d.get(2))
+  
+
+  unanswered  
+None
+ numbers = {["one","two"]: 1, "two": 2}
+print(numbers)
+  
+
+  unanswered  
+Error
+Dictionary keys can not be a mutable object.
+
+
+Write a function named construct_dictionary_from_lists that accepts 3 one dimensional lists and constructs and returns a dictionary as specified below. 
+The first one dimensional list will have n strings which will be the names of some people.
+The second one dimensional list will have n integers which will be the ages that correspond to those people.
+The third one dimensional list will have n integers which will be the scores that correspond to those people.
+Note that if a person has a score of 60 or higher (score >= 60) that means the person passed, if not the person failed.
+Your function should return a dictionary where each key is the name of a person and the value corresponding to that key should be a list containing age, score, 'pass' or 'fail' in the same order as shown in the sample output.
+For example, if the function receives the following lists:
+
+ (["paul", "saul", "steve", "chimpy"], [28, 59, 22, 5], [59, 85, 55, 60])
+then your function should return the dictionary such as:
+{'steve': [22, 55, 'fail'], 'saul': [59, 85, 'pass'], 'paul': [28, 59, 'fail'], 'chimpy': [5, 60, 'pass']}
+Note that the order of the keys of the dictionary does not need to be the same as shown in this sample example.
+
+
+ 
+################### Instructor function ###################
+def create_dictionary_from_list_q5_sample(names, ages, scores):
+    sample_dict = {}
+    for index in range(0, len(names)):
+        if scores[index] >= 60:
+            sample_dict[names[index]] = [ages[index], scores[index], "pass"]
+        else:
+            sample_dict[names[index]] = [ages[index], scores[index], "fail"]
+
+    return sample_dict
