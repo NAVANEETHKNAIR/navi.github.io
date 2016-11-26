@@ -1,0 +1,153 @@
+Write a function that accepts a file name as input argument and constructs and returns a nested dictionary from it. The keys of this dictionary should be last names, and the values should be dictionaries that contain first names as the keys and integer ages as the values. Note that the data may contain multiple people with the same last name, but it will have unique first names. Ignore any lines that start with '#' The file will contain comma separated values (CSV) For example if the contents of the file are:
+
+#first_name,last_name,age
+Matthew,Abbey,65
+Chloe,Orion,49
+Yohaan,Adams,54
+Krishna,Adams,35
+Resa,Orion,86
+Lucas,Abbey,60
+Courtney,Abbey,67
+Joseph,Orion,45
+Mark,Abbey,60
+Eva,Orion,76
+then your function should return a dictionary such as:
+{'Abbey': {'Matthew': 65, 'Courtney': 67, 'Lucas': 60, 'Mark': 60},
+ 'Orion': {'Chloe': 49, 'Resa': 86, 'Eva': 76, 'Joseph': 45},
+ 'Adams': {'Krishna': 35, 'Yohaan': 54}}
+ 
+ 
+  
+################### Sample Solution ###################
+def _construct_nested_dictionary_from_file_sample_(filename):
+    my_dictionary = {}
+    # set the mode to read mode
+    mode = "r"
+    # Make a connection to the file
+    file_pointer = open(filename, mode)
+    data = file_pointer.readlines()
+    for line in data:
+        if line[0] != "#":
+            # Split the line with the delimiter comma (',')
+            first_name, last_name, age = line.strip().split(',')
+            if last_name not in my_dictionary:
+                my_dictionary[last_name] = {first_name: int(age)}
+            else:
+                if first_name not in my_dictionary[last_name]:
+                    my_dictionary[last_name][first_name] = int(age)
+
+    return my_dictionary
+
+ 
+ 
+ Write a function named create_grades_dict that accepts a string as the name of a file. Assuming that the file is a text file which includes name and grades of students, your function should read the file and return a dictionary with the exact format as shown below: The format of the input file is:
+
+Student ID, Last_name,  Test_x, grade, Test_x, grade, ..
+Student ID, Last_name,  Test_x, grade, Test_x, grade, ..
+Student ID, Last_name,  Test_x, grade, Test_x, grade, ..
+.... 
+An example of the input file is shown below. Sample Input Output Assuming that the input file "student_grades.txt" contains the following text:
+1000123456, Rubble, Test_3,  80, Test_4 , 80
+1000123459, Chipmunk, Test_4, 96, Test_1, 86 , Quiz_1 , 88
+Notes:
+Items are seperated by comma and one or more spaces may exist between the items.
+The "ID" of each student is unique. Two students may have the same Name (but IDs will be different)
+The "Name" of each student will only include a last name with no punctuation. Maximum of 15 characters.
+There will be an integer grade for each test (0-100)
+There are only four valid tests, i.e. Test_1, Test_2, Test_3, Test_4. There may be other grades in the file and you should ignore those grades.
+Each student may have missing grade(s) for the tests. A missing grades should be considered as 0.
+Grades may not be in order i.e. Test_3 may appear before Test_1.
+Your function should read the input file, calculate the average test grade for each student and return a dictionary with the following format:
+{'Student_ID':[Last_name,Test_1_grade,Test_2_grade,Test_3_grade,Test_4_grade,average], ...}
+For example in the case of sample input file shown above, your function should return the following dictionary:
+{'1000123456': ['Rubble', 0, 0, 80, 80, 40.0], '1000123459': ['Chipmunk', 86, 0, 0, 96, 45.5]}
+
+
+
+ 
+################### Instructor function ###################
+# Type your code here
+def _create_grades_dict(file_name):
+    grade_dict={}
+    tests=['Test_1','Test_2','Test_3','Test_4']
+    fp=open(file_name,'r')
+    lines=fp.readlines()
+    fp.close()
+    for line in lines:
+        elements=line.strip().split(",")
+        if elements and elements[0]:
+            current_key=elements[0].strip()
+            if len(current_key)==10:
+                if grade_dict.get(current_key)==None:
+                    # Key does not exist. Create it
+                    grade_dict[current_key]=[elements[1].strip(),0,0,0,0,0]                
+                for index in range(2,len(elements),2):
+                    current_element=elements[index].strip()
+                    if  current_element in tests:
+                        grade_dict[current_key][int(current_element[-1])]=int(elements[index+1])
+                grade_dict[current_key][5]=sum(grade_dict[current_key][1:5])/4.0
+    return grade_dict
+    
+    
+    
+    Write a function called print_grades that accepts the name of a file (string) as input argument. Assuming the format of the file is the same as the file in part 1, your function should call the function that you developed in part 1 to read the file and create the grades dictionary. Using the grades dictionary, your function should print the names, grades, and averages of students with the exact format shown below. Notice that you are asked to write a function (NOT a program) and that function prints the grades. Your function should return None after printing the grades.
+
+Sample Input file:
+
+1000123456, Rubble, Test_3,  80, Test_4 , 80, quiz , 90
+1000123210, Bunny, Test_2, 100, Test_1, 100,Test_3   , 100 ,Test_4 , 100
+1000123458, Duck, Test_1, 86, Test_5   , 100 , Test_2 ,93 ,Test_4, 94
+Your program's output should be:
+
+    ID     |       Name       | Test_1 | Test_2 | Test_3 | Test_4 |  Avg.  |
+1000123210 | Bunny            |    100 |    100 |    100 |    100 | 100.00 |
+1000123456 | Rubble           |      0 |      0 |     80 |     80 |  40.00 |
+1000123458 | Duck             |     86 |     93 |      0 |     94 |  68.25 |
+Notes:
+Column titles are all centered
+The printed output is sorted in ascending order based on the student IDs
+Each column is seperated from a neighboring column(s) by three characters ' | ' (space vertical_bar space).
+IDs are always 10 characters and they are left justified (not counting the boundary characters)
+Names are left justified (maximum of 16 characters, not counting the boundary characters).
+Grades and averages are right justified. The width of the columns for the grades and averages is 6 characters (not counting the boundary characters).
+Averages are right justified with two digits of accuracy after the decimal point.
+Hint: Use the function which you developed in part 1 to read the input file and create a dictionary. Use .format() to format the output.
+
+
+
+ 
+################### Instructor function ###################
+def _create_grades_dict(file_name):
+    grade_dict={}
+    tests=['Test_1','Test_2','Test_3','Test_4']
+    fp=open(file_name,'r')
+    lines=fp.readlines()
+    fp.close()
+    for line in lines:
+        elements=line.strip().split(",")
+        if elements and elements[0]:
+            current_key=elements[0].strip()
+            if len(current_key)==10:
+                if grade_dict.get(current_key)==None:
+                    # Key does not exist. Create it
+                    grade_dict[current_key]=[elements[1].strip(),0,0,0,0,0]
+                for index in range(2,len(elements),2):
+                    current_element=elements[index].strip()
+                    if  current_element in tests:
+                        grade_dict[current_key][int(current_element[-1])]=int(elements[index+1])
+                grade_dict[current_key][5]=sum(grade_dict[current_key][1:5])/4.0
+    return grade_dict
+def _print_grades(file_name):
+    grade_dict=_create_grades_dict(file_name)
+    ids=list(grade_dict.keys())
+    ids.sort()
+    print("{0:^10s} | {1:^16s} | {2:^6s} | {3:^6s} | {4:^6s} | {5:^6s} | {6:^6s} |".format('ID','Name','Test_1','Test_2','Test_3','Test_4','Avg.'))
+    for id in ids:
+        name=grade_dict[id][0]
+        grades=grade_dict[id][1:5]
+        average=grade_dict[id][5]
+        print("{0:6d}".format(grade),end="")
+        print(" | {0:>6.2f} |".format(average))
+
+ 
+ 
