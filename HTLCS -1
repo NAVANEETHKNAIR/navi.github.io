@@ -1,0 +1,134 @@
+Exercise 6  
+The urllib module provides methods for manipulating URLs and downloading information from the web. The following example downloads and prints a secret message from thinkpython.com:
+import urllib
+
+conn = urllib.urlopen('http://thinkpython.com/secret.html')
+for line in conn:
+    print line.strip()
+Run this code and follow the instructions you see there. Solution: http://thinkpython.com/code/zip_code.py.
+
+
+Exercise 4  
+Swampy (see Chapter 4) provides a module named World, which defines a user-defined type also called World. You can import it like this:
+from swampy.World import World
+Or, depending on how you installed Swampy, like this:
+from World import World
+The following code creates a World object and calls the mainloop method, which waits for the user.
+world = World()
+world.mainloop()
+A window should appear with a title bar and an empty square. We will use this window to draw Points, Rectangles and other shapes. Add the following lines before calling mainloop and run the program again.
+canvas = world.ca(width=500, height=500, background='white')
+bbox = [[-150,-100], [150, 100]]
+canvas.rectangle(bbox, outline='black', width=2, fill='green4')
+You should see a green rectangle with a black outline. The first line creates a Canvas, which appears in the window as a white square. The Canvas object provides methods like rectangle for drawing various shapes.
+bbox is a list of lists that represents the “bounding box” of the rectangle. The first pair of coordinates is the lower-left corner of the rectangle; the second pair is the upper-right corner.
+
+You can draw a circle like this:
+
+canvas.circle([-25,0], 70, outline=None, fill='red')
+The first parameter is the coordinate pair for the center of the circle; the second parameter is the radius.
+If you add this line to the program, the result should resemble the national flag of Bangladesh (see http://en.wikipedia.org/wiki/Gallery_of_sovereign-state_flags).
+
+Write a function called draw_rectangle that takes a Canvas and a Rectangle as arguments and draws a representation of the Rectangle on the Canvas.
+Add an attribute named color to your Rectangle objects and modify draw_rectangle so that it uses the color attribute as the fill color.
+Write a function called draw_point that takes a Canvas and a Point as arguments and draws a representation of the Point on the Canvas.
+Define a new class called Circle with appropriate attributes and instantiate a few Circle objects. Write a function called draw_circle that draws circles on the canvas.
+Write a program that draws the national flag of the Czech Republic. Hint: you can draw a polygon like this:
+points = [[-150,-100], [150, 100], [150, -100]]
+canvas.polygon(points, fill='blue')
+I have written a small program that lists the available colors; you can download it from http://thinkpython.com/code/color_list.py.
+
+
+
+Code examples from this chapter are available from http://thinkpython.com/code/Time1.py; solutions to these exercises are available from http://thinkpython.com/code/Time1_soln.py.
+Exercise 6  
+Write a function called mul_time that takes a Time object and a number and returns a new Time object that contains the product of the original Time and the number.
+Then use mul_time to write a function that takes a Time object that represents the finishing time in a race, and a number that represents the distance, and returns a Time object that represents the average pace (time per mile).
+
+Exercise 7  
+The datetime module provides date and time objects that are similar to the Date and Time objects in this chapter, but they provide a rich set of methods and operators. Read the documentation at http://docs.python.org/2/library/datetime.html.
+Use the datetime module to write a program that gets the current date and prints the day of the week.
+Write a program that takes a birthday as input and prints the user’s age and the number of days, hours, minutes and seconds until their next birthday.
+For two people born on different days, there is a day when one is twice as old as the other. That’s their Double Day. Write a program that takes two birthdays and computes their Double Day.
+For a little more challenge, write the more general version that computes the day when one person is n times older than the other.
+
+
+Exercise 7  
+This exercise is a cautionary tale about one of the most common, and difficult to find, errors in Python. Write a definition for a class named Kangaroo with the following methods:
+An __init__ method that initializes an attribute named pouch_contents to an empty list.
+A method named put_in_pouch that takes an object of any type and adds it to pouch_contents.
+A __str__ method that returns a string representation of the Kangaroo object and the contents of the pouch.
+Test your code by creating two Kangaroo objects, assigning them to variables named kanga and roo, and then adding roo to the contents of kanga’s pouch.
+Download http://thinkpython.com/code/BadKangaroo.py. It contains a solution to the previous problem with one big, nasty bug. Find and fix the bug.
+
+If you get stuck, you can download http://thinkpython.com/code/GoodKangaroo.py, which explains the problem and demonstrates a solution.
+
+Exercise 8  
+Visual is a Python module that provides 3-D graphics. It is not always included in a Python installation, so you might have to install it from your software repository or, if it’s not there, from http://vpython.org.
+The following example creates a 3-D space that is 256 units wide, long and high, and sets the “center” to be the point (128,128,128). Then it draws a blue sphere.
+
+from visual import *
+
+scene.range = (256, 256, 256)
+scene.center = (128, 128, 128)
+
+color = (0.1, 0.1, 0.9)          # mostly blue
+sphere(pos=scene.center, radius=128, color=color)
+color is an RGB tuple; that is, the elements are Red-Green-Blue levels between 0.0 and 1.0 (see http://en.wikipedia.org/wiki/RGB_color_model).
+If you run this code, you should see a window with a black background and a blue sphere. If you drag the middle button up and down, you can zoom in and out. You can also rotate the scene by dragging the right button, but with only one sphere in the world, it is hard to tell the difference.
+
+The following loop creates a cube of spheres:
+
+t = range(0, 256, 51)
+for x in t:
+    for y in t:
+        for z in t:
+            pos = x, y, z
+            sphere(pos=pos, radius=10, color=color)
+Put this code in a script and make sure it works for you.
+Modify the program so that each sphere in the cube has the color that corresponds to its position in RGB space. Notice that the coordinates are in the range 0–255, but the RGB tuples are in the range 0.0–1.0.
+Download http://thinkpython.com/code/color_list.py and use the function read_colors to generate a list of the available colors on your system, their names and RGB values. For each named color draw a sphere in the position that corresponds to its RGB values.
+You can see my solution at http://thinkpython.com/code/color_space.py.
+
+
+Exercise 6  
+The following are the possible hands in poker, in increasing order of value (and decreasing order of probability):
+pair:
+two cards with the same rank
+two pair:
+two pairs of cards with the same rank
+three of a kind:
+three cards with the same rank
+straight:
+five cards with ranks in sequence (aces can be high or low, so Ace-2-3-4-5 is a straight and so is 10-Jack-Queen-King-Ace, but Queen-King-Ace-2-3 is not.)
+flush:
+five cards with the same suit
+full house:
+three cards with one rank, two cards with another
+four of a kind:
+four cards with the same rank
+straight flush:
+five cards in sequence (as defined above) and with the same suit
+The goal of these exercises is to estimate the probability of drawing these various hands.
+Download the following files from http://thinkpython.com/code:
+Card.py
+: A complete version of the Card, Deck and Hand classes in this chapter.
+PokerHand.py
+: An incomplete implementation of a class that represents a poker hand, and some code that tests it.
+If you run PokerHand.py, it deals seven 7-card poker hands and checks to see if any of them contains a flush. Read this code carefully before you go on.
+Add methods to PokerHand.py named has_pair, has_twopair, etc. that return True or False according to whether or not the hand meets the relevant criteria. Your code should work correctly for “hands” that contain any number of cards (although 5 and 7 are the most common sizes).
+Write a method named classify that figures out the highest-value classification for a hand and sets the label attribute accordingly. For example, a 7-card hand might contain a flush and a pair; it should be labeled “flush”.
+When you are convinced that your classification methods are working, the next step is to estimate the probabilities of the various hands. Write a function in PokerHand.py that shuffles a deck of cards, divides it into hands, classifies the hands, and counts the number of times various classifications appear.
+Print a table of the classifications and their probabilities. Run your program with larger and larger numbers of hands until the output values converge to a reasonable degree of accuracy. Compare your results to the values at http://en.wikipedia.org/wiki/Hand_rankings.
+Solution: http://thinkpython.com/code/PokerHandSoln.py.
+Exercise 7  
+This exercise uses TurtleWorld from Chapter 4. You will write code that makes Turtles play tag. If you are not familiar with the rules of tag, see http://en.wikipedia.org/wiki/Tag_(game).
+Download http://thinkpython.com/code/Wobbler.py and run it. You should see a TurtleWorld with three Turtles. If you press the Run button, the Turtles wander at random.
+Read the code and make sure you understand how it works. The Wobbler class inherits from Turtle, which means that the Turtle methods lt, rt, fd and bk work on Wobblers.
+The step method gets invoked by TurtleWorld. It invokes steer, which turns the Turtle in the desired direction, wobble, which makes a random turn in proportion to the Turtle’s clumsiness, and move, which moves forward a few pixels, depending on the Turtle’s speed.
+Create a file named Tagger.py. Import everything from Wobbler, then define a class named Tagger that inherits from Wobbler. Call make_world passing the Tagger class object as an argument.
+Add a steer method to Tagger to override the one in Wobbler. As a starting place, write a version that always points the Turtle toward the origin. Hint: use the math function atan2 and the Turtle attributes x, y and heading.
+Modify steer so that the Turtles stay in bounds. For debugging, you might want to use the Step button, which invokes step once on each Turtle.
+Modify steer so that each Turtle points toward its nearest neighbor. Hint: Turtles have an attribute, world, that is a reference to the TurtleWorld they live in, and the TurtleWorld has an attribute, animals, that is a list of all Turtles in the world.
+Modify steer so the Turtles play tag. You can add methods to Tagger and you can override steer and __init__, but you may not modify or override step, wobble or move. Also, steer is allowed to change the heading of the Turtle but not the position.
+Adjust the rules and your steer method for good quality play; for example, it should be possible for the slow Turtle to tag the faster Turtles eventually.
