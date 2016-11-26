@@ -1,0 +1,30 @@
+File access Modes
+
+Mode	Description
+r	Opens a file for reading only. This is the default mode.
+rb	Opens a file for reading only in binary format
+r+	Opens a file for both reading and writing. 
+rb+	Opens a file for both reading and writing in binary format. 
+w	Opens a file for writing only. Overwrites the file if the file exists. Create a new file if it does not exist.
+wb	Opens a file for writing only in binary format. 
+w+	Opens a file for both writing and reading. Overwrites the file if the file exists. Create a new file if it does not exist.
+wb+	Opens a file for both writing and reading in binary format. 
+a	Opens a file for appending. The file pointer is at the end of the file if the file exists. 
+ab	Opens a file for appending in binary format. 
+a+	Opens a file for both appending and reading. 
+ab+	Opens a file for both appending and reading in binary format. 
+
+
+Common File Functions and Methods
+
+Methods and Functions	Description
+open()	returns a file object, and is most commonly used with two arguments: open(filename, mode).
+file.close()	Close the file
+file.read([size])  	Read entire file. If size is specified then read at most size bytes.
+file.readline([size])	Read one line from file. If size is specified then read at most size bytes.
+file.readlines([size]) 	Read all the lines from the file and return a list of lines. If size is specified then read at most size bytes.
+file.write()	Writes the contents of string to the file, returning the number of characters written.
+file.tell()	Returns an integer giving the file object’s current position in the file
+file.seek()	Changes the file object’s position
+
+
