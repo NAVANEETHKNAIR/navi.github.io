@@ -1,0 +1,203 @@
+What will be printed after each of the following code segments? If error, then write Error
+
+ my_list = []
+for k in range(1,101,20):
+    my_list.append(k)
+print (my_list[: :2] )
+
+  unanswered  [1,41,81]
+
+def my_fun(x):
+    for k in range (len(x)):
+        x.extend(x[:k])
+m = [1,5,3]
+my_fun(m)
+print(m)
+
+  unanswered  [1,5,3,1,1,5]
+
+def my_fun(x):
+    for k in range (len(x)):
+        x.append(x[:k])
+m = [1,5,3]
+my_fun(m)
+print(m)
+
+  unanswered  [1,5,3,[],[1],[1,5]]
+
+my_list = [9, 8, 7]
+for k in range (3):
+    my_list.insert(-k, k+1)
+print(my_list)
+
+  unanswered  [1,9,8,3,2,7]
+
+my_list = [12, "cat", 3.4, "dog", 62]
+new_list = []
+for k in range(5):
+    if k % 2:
+        m = my_list.pop(k)
+        new_list.append(m)
+print(new_list)
+
+  unanswered  ['cat',62]
+
+def my_fun(my_list,s,e):
+    del (my_list[s:e])
+ 
+values = [2, 9, 16, 3, 24, 13, 15]
+my_fun(values,-6,-4)
+my_fun(values,2,4)
+print(values)
+
+  unanswered  [2,3,15]
+
+def my_fun(i):
+    values = []
+    values.append(i)
+    return values
+my_fun(5)
+print(my_fun(3))
+
+  unanswered  [3]
+
+def my_fun(m):
+    x = []
+    for k in range(len(m)):
+        if m[k] % 3 == 0 and m[k] % 2:
+            x.insert(k, m[k])
+    return x
+ 
+values = [2, 9, 16, 3, 24, 13, 15]
+print(my_fun(values))
+
+  unanswered  [9,3,15]
+
+def my_fun(m, increment):
+    x = 0
+    while x < len(m):
+        m[x] = m[x] + increment
+        x = x + 1
+    return m 
+
+values = [4, 3, 7]
+print(my_fun(values, 2))
+
+  unanswered  [6,5,9]
+
+def my_fun(m):
+    x = m[:]
+    for k in x:
+        if type(k) == int:
+            m.remove(k)
+
+values = [3, [3,4], 2.9, 3, 6, 'dog', 5]
+my_fun(values)
+print(values)
+
+  unanswered  [[3,4],2.9,'dog']
+  
+  
+  
+  Write a function called pattern_sum that receives two single digit positive integers, (k and m) as parameters and calculates and returns the total sum as: 
+k + kk + kkk + .... (the last number in the sequence should have m digits) 
+For example, if the two integers are:
+
+(4, 5)
+Your function should return the total sum of: 
+4 + 44 + 444 + 4444 + 44444 
+Notice the last number in this sequence has 5 digits. The return value should be:
+49380
+if the two integers are:
+(5, 3)
+Your function should return the total sum of: 
+5 + 55 + 555 
+Notice the last numebr in this sequence has 3 digits. The return value should be:
+615
+
+
+################### Instructor function ###################
+def _chain_of_number_sample_ed2_(a, b):
+    chain_list = []
+    my_sum = 0
+    for x in range(1, b+1):
+        chain_list.append(x*str(a))
+    for items in chain_list:
+        my_sum = my_sum + int(items)
+
+    return my_sum
+    
+    
+    Write a program that asks the user to enter an integer between 1 and 9999 (both inclusive) and then prints the input integer using words. For example if the user enters:
+
+3421
+Then your program should print
+three thousand four hundred twenty one
+more examples:
+Input	Printed Output
+15	fifteen
+7000	seven thousand
+501	five hundred one
+1008	one thousand eight
+7	seven
+Notes:
+the words in the printed output should all be lower cased and separated by only one space
+There is no "and" between the printed words.
+Notice that when you use a print() statement, Python by default adds a new line after each printed output. If you do not want each new print statment to be printed in a new line then you should add end="" at the end of your print arguments as shown below:
+print("seven ", end = "")
+print("thousand")
+This will print
+seven thousand
+Also when you use two arguments in a print statement, Python adds a space between them by default. For example:
+print("x",5)
+will print
+x 5
+If you do not want a space to be inserted between your arguments then you should add sep="" at the end of your print arguments as shown below:
+print("x",5,sep="")
+will print
+x5
+Make sure your words match the following spellings:
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen,
+sixteen, seventeen, eighteen, nineteen, twenty, thirty, forty, fifty, sixty, seventy, eighty,
+ninety, hundred, thousand
+
+
+
+
+ 
+################### Instructor code ###################
+n=int(input('please enter an integer between 1 and 9999: '))
+one_to_ten=['zero','one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+ten_to_nineteen=['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
+'sixteen', 'seventeen', 'eighteen', 'nineteen']
+twenty_to_ninety=['','','twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty',
+'ninety']
+temp_str=""
+if n==0:
+    temp_str='zero'
+    #print('zero')
+first_digit=n//1000
+second_digit=(n%1000)//100
+third_digit=(n%100)//10
+fourth_digit=(n%10)
+if first_digit>0:
+    temp_str=temp_str+one_to_ten[first_digit]+' thousand '
+    #print (one_to_ten[first_digit],'thousand ',end='')
+if second_digit>0:
+    temp_str=temp_str+one_to_ten[second_digit]+' hundred '
+    #print (one_to_ten[second_digit],'hundred ',end='')
+if third_digit>1:
+    temp_str=temp_str+twenty_to_ninety[third_digit]+" "
+    #print (twenty_to_ninety[third_digit],'',end='')
+if third_digit==1:
+    temp_str=temp_str+ten_to_nineteen[fourth_digit]+" "
+    #print (ten_to_nineteen[fourth_digit],'',end='')
+else:
+    if fourth_digit:
+        temp_str=temp_str+one_to_ten[fourth_digit]+" "
+        #print (one_to_ten[fourth_digit],'',end='')
+if temp_str[-1]==" ":
+    temp_str=temp_str[0:-1]
+print (temp_str)
+
+ 
