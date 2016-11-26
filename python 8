@@ -1,0 +1,34 @@
+Write a function that accepts a list and a value of an element and returns the count of how many times that element appears in the list. The behaviour of this function should be exactly like the list.count() method. You may NOT use any built in list methods for this problem.
+
+################### Sample Solution ###################
+def _list_manipulation_sample3_(input_list, k):
+    my_Count = 0
+    for element in input_list:
+        if element == k:
+            my_Count = my_Count + 1
+    return my_Count
+
+ 
+ Write a function that accepts a list and return a new list which contains all but the first and last elements of the original list.
+ 
+ 
+################### Sample Solution ###################
+def _list_manipulation_sample4_(input_list):
+    newlist = input_list[1:-1]
+    return newlist
+    
+  
+  
+  Write a function that accepts a list that contains positive integers and returns a new list which contains all the elements from original list but adds 1 to those elements which are odd. For example if :
+
+input_list = [12, 3, 4, 5, 6]
+Then your function should return a list such as:
+[12, 4, 4, 6, 6]
+     
+################### Sample Solution ###################
+def _list_manipulation_sample5_(my_list):
+    input_list = my_list[:]
+    for x in range(0, len(input_list)):
+        if input_list[x] % 2 != 0:
+            input_list[x] = input_list[x] + 1
+    return input_list
