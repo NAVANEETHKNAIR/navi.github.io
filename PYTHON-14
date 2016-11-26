@@ -1,0 +1,88 @@
+Namespace and Scope Exercise 2.1
+0 points possible (ungraded)
+What does the following program print? If an Error occurs type 'Error' exactly without the quotes. If None is printed type 'None' exactly without the quotes.
+
+
+def evaluate_expression_1(x):
+    x = x + 5
+
+    def evaluate_expression_2(x):
+        return x
+
+    return x
+
+scholar = 1008
+print(evaluate_expression_1(scholar))
+ 
+ 
+  unanswered  
+1013
+Explanation
+Be careful about spaces. You should type exactly what the program prints and nothing else!
+ 
+ResetReset Your Answer   
+Show Answer
+SubmitSubmit Your Answer
+Namespace and Scope Exercise 2.2
+0 points possible (ungraded)
+What does the following program print? If an Error occurs type 'Error' exactly without the quotes. If None is printed type 'None' exactly without the quotes.
+
+
+def evaluate_expression_1():
+    global x
+    x = x + 5
+
+    def evaluate_expression_2():
+        return None
+
+    return x
+# Main Program #
+x = 33
+print(evaluate_expression_1())
+ 
+ 
+  unanswered  
+38
+Explanation
+Be careful about spaces. You should type exactly what the program prints and nothing else!
+
+
+What does the following program print? If an Error occurs type 'Error' exactly without the quotes. If None is printed type 'None' exactly without the quotes.
+
+
+def evaluate_expression_1():
+    global x
+    x = x - 3
+
+    def evaluate_expression_2():
+        global x
+        return x + 7
+
+    return evaluate_expression_2()
+# Main Program #
+x = 33
+print(evaluate_expression_1())
+ 
+ 
+  unanswered  
+37
+
+
+What does the following program print? If an Error occurs type 'Error' exactly without the quotes. If None is printed type 'None' exactly without the quotes.
+
+
+def evaluate_expression_1(x):
+    x = x - 3
+
+    def evaluate_expression_2():
+        global x
+        return x + 7
+
+    return evaluate_expression_2()
+# Main Program #
+x = 7
+print(evaluate_expression_1(x))
+ 
+ 
+  unanswered  
+14
