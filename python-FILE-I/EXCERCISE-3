@@ -1,0 +1,87 @@
+Write a function named calculate_grades that receives a file name. The file contains names of students and their grades for 4 quizzes and returns a tuple as specified below. Each line of the file will have the following format:
+
+name,quiz1_score,quiz2_score,quiz3_score,quiz4_score
+For example if the contents of the file are:
+john,89,94,81,97
+eva,40,45,65,90
+joseph,0,0,54,99
+tim,73,74,89,91
+The name and grades are separated by commas. Your function should return the names of the student and their quiz averages as a tuple of tuples as shown below:
+(('eva', 60.0), ('john', 90.25), ('joseph', 38.25), ('tim', 81.75))
+
+
+ 
+################### Sample Solution ###################
+def sample_quiz6_grades_sample(file_name):
+    file_pointer = open(file_name, 'r')
+    # You can use either .read() or .readline() or .readlines()
+    data = file_pointer.readlines()
+    students_list = []
+    for each_line in data:
+        name,quiz1,quiz2,quiz3,quiz4 = each_line.strip().split(',')
+        quiz_average = (float(quiz1)+float(quiz2)+float(quiz3)+float(quiz4))/4
+        students_list.append((name,quiz_average))
+    
+    
+    unSorted = True
+    while unSorted:
+        unSorted = False
+        for index in range(0, len(students_list)-1):
+            # if next element is greater element then swap them
+            if students_list[index][0] > students_list[index + 1][0]:
+                temporary_variable = students_list[index]
+                students_list[index] = students_list[index + 1]
+                students_list[index + 1] = temporary_variable
+                unSorted = True    
+    my_tuple = tuple(students_list)
+    return my_tuple
+    
+    
+    
+    Write a function named formatted_print that receives a dictionary as argument. The keys of the dictionary will be the names of the students and the values of the dictionary will be their average scores. Your function should print this information exactly as specified below : 
+
+For example if the dictionary received by the function is
+
+{'john':34.480, 'eva':88.5, 'alex':90.55, 'tim': 65.900} 
+Then your function should print:
+alex       90.55
+eva        88.50
+tim        65.90
+john       34.48
+Note:
+The names have to be accommodated within 10 spaces and they are left justified.
+The scores are floats and they should be right justified in 6 spaces with two digits after the decimal point.
+All this information has to be sorted (descending order) by the scores of the students. Notice how alex has the highest score and appears first and john has the lowest score and appears last.
+
+
+
+
+
+################### Sample Solution ###################
+def dict_to_print(a):
+    my_names = list(a.keys())
+    my_scores = list(a.values())
+    
+    # Sort the information by score descending order
+    unSorted = True
+    while unSorted:
+        unSorted = False
+        for index in range(0, len(my_scores)-1):
+            # if next element is greater element then swap them
+            if my_scores[index] < my_scores[index + 1]:
+                # sort the scores
+                temporary_score = my_scores[index]
+                my_scores[index] = my_scores[index + 1]
+                my_scores[index + 1] = temporary_score
+                # sort the names as well 
+                temporary_name = my_names[index]
+                my_names[index] = my_names[index + 1]
+                my_names[index + 1] = temporary_name               
+                
+                unSorted = True    
+    for x in range(0, len(my_names)):
+        print("{0:<10s}{1:>6.2f}".format(my_names[x], my_scores[x]))
+
+ 
+ 
+ 
